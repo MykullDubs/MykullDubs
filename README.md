@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @MykullDubs aka Michael Wilson hit me up at +1(507)724-8682.
+- 👋 Hi, I’m @MykullDubs aka Michael Wilson instructional designer, computer scientist and speller of words.
 - 👀 I’m interested in lingustics and how what we say, type or have transcribed has meaning and can be quantified, analyised and learned from.
 - 🌱 I’m currently learning natural language processing, instructional design and redesign, cognitive science, the econmy of motion.
 - 💞️ I’m looking to collaborate on anything at all
