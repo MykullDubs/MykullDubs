@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Phrasal Verbs with Turn Quiz</title>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #f1EBE4;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+
+       h1 {
+            font-family: "Roboto Condensed";
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-bottom: -20px;
+            margin: auto;
+            margin-bottom: 2%;
+            width: 50%;
+        }
+        h2,h3 {
+            font-family: "Roboto Condensed";
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin:auto;
+            margin-bottom: 2%;
+            width: 50%;
+        }
+         p {
+             margin-bottom: -5px;
+             margin: auto;
+             font-family: "Roboto Condensed";
+             justify-content: center;
+             text-align: left;
+             width: 50%;
+        }
+
+
+        /* Styling for the draggable elements */
+        .draggable {
+            justify-content:center;
+            align-items: center;
+            font-family: "Roboto Black";
+            width: 90px;
+            height: 20px;
+            background-color: #47A130;
+            color: white;
+            text-align: center;
+            padding: 2px;
+            margin: 2px;
+            margin-top: 1px;
+            cursor: move;
+        }
+        .container {
+            text-align: left;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: auto;
+            width: 50%;
+            margin:auto;
+        }
+        .container p {
+            text-align: left;
+        }
+
+        /* Styling for the drop zones */
+        .dropzone {
+            background-color: floralwhite;
+            border: 2px solid #555;
+            width: 100px;
+            height: 20px;
+            padding: 3px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Phrasal Verbs With "Turn" Quiz</h1>
+
+<!-- Question 1: Replace the "PREPOSITION" placeholder with the correct preposition -->
+<h2>Choose the correct preposition to complete the following sentences:</h2>
+
+<p>1. I forgot to turn ______ the boiler before I left home.<span id="points-1"></span></p>
+
+<!-- Draggable prepositions -->
+<div class="container">
+<div class="draggable" draggable="true" data-correct="off">off</div>
+<div class="draggable" draggable="true">up</div>
+<div class="draggable" draggable="true">on</div>
+
+
+<!-- Drop zone to drop the correct preposition -->
+
+<div class="dropzone"></div>
+</div>
+
+
+
+<!-- Question 2: Replace the "PREPOSITION" placeholder with the correct preposition -->
+<p>2. I turned the car ______ as soon as I realized what I had forgotten to do.<span id="points-2"></span></p>
+
+<!-- Draggable prepositions -->
+<div class="container">
+<div class="draggable" draggable="true">over</div>
+<div class="draggable" draggable="true">in</div>
+<div class="draggable" draggable="true" data-correct="around">around</div>
+
+<!-- Drop zone to drop the correct preposition -->
+<div class="dropzone"></div>
+</div>
+<!-- Question 3: Replace the "PREPOSITION" placeholder with the correct preposition -->
+<p>3. I asked her to turn _____ the music because I could hardly hear.<span id="points-3"></span></p>
+
+<!-- Draggable prepositions -->
+<div class="container">
+    <div class="draggable" draggable="true">up</div>
+    <div class="draggable" draggable="true">into</div>
+    <div class="draggable" draggable="true" data-correct="down">down</div>
+
+    <!-- Drop zone to drop the correct preposition -->
+    <div class="dropzone"></div>
+</div>
+<!-- Question 4: Replace the "PREPOSITION" placeholder with the correct preposition -->
+<p>4. We were turned ______ from the bar because it was about to close.<span id="points-4"></span></p>
+
+<!-- Draggable prepositions -->
+<div class="container">
+    <div class="draggable" draggable="true">into</div>
+    <div class="draggable" draggable="true">off</div>
+    <div class="draggable" draggable="true" data-correct="away">away</div>
+
+    <!-- Drop zone to drop the correct preposition -->
+    <div class="dropzone"></div>
+</div>
+
+<!-- Question 5: Replace the "PREPOSITION" placeholder with the correct preposition -->
+<p>5. It was getting late, so I decided to turn _____ and call it a night<span id="points-5"></span></p>
+
+<!-- Draggable prepositions -->
+<div class="container">
+    <div class="draggable" draggable="true">out</div>
+    <div class="draggable" draggable="true">down</div>
+    <div class="draggable" draggable="true" data-correct="in">in</div>
+
+    <!-- Drop zone to drop the correct preposition -->
+    <div class="dropzone"></div>
+
+</div>
+<container>
+    <h1> Total Points: <span id="total-points"></span> /5 </h1>
+</container>
+<script>
+    //Point Tracker
+    let totalPoints = 0;
+    // Get all draggable elements
+    const draggables = document.querySelectorAll('.draggable');
+
+    // Get all drop zones
+    const dropzones = document.querySelectorAll('.dropzone');
+
+    // Loop through draggable elements and add event listeners for drag start and drag end
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+
+    // Loop through drop zones and add event listeners for drag over and drop
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropzone.classList.add('draggingover');
+        });
+
+        dropzone.addEventListener('drop', () => {
+            const draggable = document.querySelector('.dragging');
+            dropzone.appendChild(draggable);
+            dropzone.classList.remove('draggingover');
+
+            // Check if the dropped preposition is correct
+            const sentence = dropzone.previousElementSibling.textContent;
+            const preposition = draggable.textContent;
+            const correctAnswer = draggable.dataset.correct;
+
+            if (dropzone.textContent === correctAnswer) {
+                dropzone.style.backgroundColor = '#47A130'
+                draggable.style.backgroundColor = "#47A130";
+                totalPoints++;
+                document.getElementById('total-points').textContent = totalPoints;
+
+            const points = document.querySelector('#points-${questionNumber}');
+            let currentPoints = parseInt(points.textContent);
+            currentPoints++;
+            points.textContent = currentPoints;
+            totalPoints++;
+            }
+            else {
+                dropzone.style.backgroundColor = '#6E0D25'
+                draggable.style.backgroundColor = '#6E0D25'
+                totalPoints0;
+                document.getElementById('total-points').textContent = totalPoints;
+                ;
+            }
+            const totalPointsElement = document.createElement('p');
+            totalPointsElement.textContent = `Total points: ${totalPoints} `;
+            document.body.appendChild(totalPointsElement);
+        });
+    });
+</script>
+</body>
+</html>
+
+
